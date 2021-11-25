@@ -1,0 +1,119 @@
+import java.util.Scanner;
+import java.util.Random;
+import java.lang.Math;
+
+public class Main {
+    public static void main(String[] args) {
+    	int winnings, exit, power;
+    	winnings = 0;
+    	exit = 0;
+    	power = 0;
+        Scanner kb = new Scanner(System.in);
+        String decision1;
+        int array1[], array2[];
+        array1 = new int[5];
+        array2 = new int[5];
+        Random generator = new Random();
+
+        System.out.print("Welcome Player\n\n");
+        System.out.print("What is your name player: ");
+        String fname = kb.next();
+        String lname = kb.next();
+
+        System.out.print("What is your total credit: ");
+        int credit = kb.nextInt();
+        System.out.print("\n\n");
+
+        System.out.println("\t=======================================");
+        System.out.println("\t Welcome to the Panther Lottery " + fname +"!");
+        System.out.println("\t\t  $25 Bet per Round \n\t\t       Have Fun");
+        System.out.println("\t=======================================\n\n\n");
+
+        System.out.println("Would you like to play the lottery " + fname + "?");
+
+	    System.out.print("Enter \"yes\" or \"no\": ");
+        decision1 = kb.next();
+
+        if(credit >= 25 && decision1.equals("yes") || decision1.equals("Yes") || decision1.equals("Y") || decision1.equals("y")) {
+            do{
+	            credit -= 25;
+
+	            System.out.print("Enter five integers, each between 1 and 99: ");
+
+	            for(int i = 0; i < 5; i++) {
+	                array1[i] = kb.nextInt();
+	            }
+
+	            System.out.print("The winning numbers are: ");
+
+	            for(int k = 0; k < 5; k++) {
+	                array2[k] = generator.nextInt(99) + 1;
+	                int value2 = array2[k];
+	                System.out.print(value2 + " ");
+	            }
+
+	            System.out.println(" ");
+	            
+	            for(int i = 0; i < 5; i++) {          //First array
+
+	                for(int k = 0; k < 5; k++) {      //Second array
+
+	                    if(array1[i] == array2[k]) {
+	                        power = i + 1;                   //Winning positions start at 1
+	                        winnings += Math.pow(3, power);                  
+	                    }
+	                }
+	            } 
+	            
+	            if(power == 0) {
+		           System.out.println("Sorry you didn't win anything, better luck next time");
+		           System.out.println("Your new Total Credit is: $" + credit + ".00\n");
+		           System.out.println("Would you like to play the lottery again " + fname + "? ");
+	            }
+
+	            else {
+		           System.out.println("Congratulations, you win $" + winnings + ".00");
+		           System.out.println("Your new Total Credit is: $" + (credit + winnings) + ".00\n");
+		           System.out.println("Would you like to play the lottery again " + fname + "? ");
+	            }
+	            decision1 = kb.next();
+
+
+	        }while(credit >= 25 && decision1.equals("yes") || decision1.equals("Yes") || decision1.equals("Y") || decision1.equals("y"));
+	       
+	       if(credit < 25) {
+	          System.out.println("You don't have enough credit to play this game!");
+	          System.out.println("Your total winnings are $" + winnings + ".00");
+	          System.out.println("Your new Total Credit is: $" + credit + ".00");
+	          System.out.println("Please see the cashier at the window for your money " + fname + " " + lname );
+	       }
+	       
+	       else {
+	          System.out.println("Your total winnings are $" + winnings + ".00");
+	          System.out.println("Your new Total Credit is: $" + credit + ".00");
+	          System.out.println("Please see the cashier at the window for your money " + fname + " " + lname );
+	       }
+        
+        }
+
+		else if(decision1.equals("No") || decision1.equals("no") || decision1.equals("N") || decision1.equals("n")) {
+	       System.out.println("Your total winnings are $" + winnings + ".00");
+	       System.out.println("Your new Total Credit is: $" + credit + ".00");
+	       System.out.println("Please see the cashier at the window for your money " + fname + " " + lname );
+	    }
+	    
+	    else if(credit < 25) {
+	       System.out.println("You don't have enough credit to play this game!");
+	       System.out.println("Your total winnings are $" + winnings + ".00");
+	       System.out.println("Your new Total Credit is: $" + credit + ".00");
+	       System.out.println("Please see the cashier at the window for your money " + fname + " " + lname );
+	    }
+
+	    else {
+	    	System.out.println("\nPlease enter a valid response");
+	    }
+    }    
+}
+
+
+
